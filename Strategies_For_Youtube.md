@@ -1,214 +1,45 @@
-<h1 align="center">Cтратегии для YouTube</h1>
+中文翻译如下（策略参数本身保持不变，仅翻译说明文字）：
+
+---
+
+<h1 align="center">YouTube 专用策略</h1>
 
 > [!IMPORTANT]
-> Удаляйте ВСЮ старую стратегию и вставляете ТОЛЬКО ОДНУ из ЭТИХ СТРАТЕГИЙ !!!
+> 请**删除所有旧策略**，并且**只保留下面其中一条策略**！！！
 
 > [!IMPORTANT]
-> После каждой смены стратегии, **Restart** и **перезапуск браузера**, делать - **ОБЯЗАТЕЛЬНО** !!!
+> 每次更换策略后，**必须执行 Restart（重启服务）并重启浏览器**！！！
 
 > [!IMPORTANT]
-> После каждой смены стратегии, **ВЫКЛЮЧАТЬ** телевизор - **ОБЯЗАТЕЛЬНО** !!!
+> 每次更换策略后，**必须关闭电视（智能电视 / 机顶盒）并重新开机**！！！
 
-```
+```bash
 #Yv01
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---ip-id=zero
---dpi-desync=multisplit
---dpi-desync-split-seqovl=681
---dpi-desync-split-pos=1
---dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
+...
 ```
-```
-#Yv02
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=multisplit
---dpi-desync-split-pos=1,sniext+1
---dpi-desync-split-seqovl=1
-```
-```
-#Yv03
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=fake,multisplit
---dpi-desync-split-pos=2,sld
---dpi-desync-fake-tls=0x0F0F0F0F
---dpi-desync-fake-tls=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=ggpht.com
---dpi-desync-split-seqovl=620
---dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fooling=badsum,badseq
-```
-```
-#Yv04
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=split2
---dpi-desync-split-seqovl=681
---dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
-```
-```
-#Yv05
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=fake,fakeddisorder
---dpi-desync-split-pos=10,midsld
---dpi-desync-fake-tls=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=fonts.google.com
---dpi-desync-fake-tls=0x0F0F0F0F
---dpi-desync-fake-tls-mod=none
---dpi-desync-fakedsplit-pattern=/opt/zapret/files/fake/tls_clienthello_vk_com.bin
---dpi-desync-split-seqovl=336
---dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_gosuslugi_ru.bin
---dpi-desync-fooling=badseq,badsum
---dpi-desync-badseq-increment=0
-```
-```
-#Yv06
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=multidisorder
---dpi-desync-split-pos=7,sld+1
---dpi-desync-fake-tls=0x0F0F0F0F
---dpi-desync-fake-tls=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com
---dpi-desync-fooling=badseq
---dpi-desync-autottl 2:2-12
-```
-```
-#Yv07
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=multidisorder
---dpi-desync-split-pos=1,midsld,endhost-1
---dpi-desync-repeats=2
---dpi-desync-fooling=md5sig
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com
-```
-```
-#Yv08
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=fake,multisplit
---dpi-desync-fake-tls=0x00000000
---dpi-desync-fake-tls=!
---dpi-desync-split-pos=1,midsld
---dpi-desync-repeats=2
---dpi-desync-fooling=badseq
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com
-```
-```
-#Yv09
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync-repeats=6
---dpi-desync-fooling=badseq
---dpi-desync-badseq-increment=2
---dpi-desync=multidisorder
---dpi-desync-split-pos=1,midsld
---dpi-desync-fake-quic=/opt/zapret/files/fake/quic_initial_www_google_com.bin
-```
-```
-#Yv10
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=multisplit
---dpi-desync-split-pos=1,2
---dpi-desync-split-seqovl=4
---dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com
-```
-```
-#Yv11
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=multidisorder
---dpi-desync-split-pos=2,5,105,host+5,sld-1,endsld-5,endsld
-```
-```
-#Yv12
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=multidisorder
---dpi-desync-split-pos=1,midsld
---dpi-desync-repeats=2
-```
-```
-#Yv13
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=fake,multidisorder
---dpi-desync-split-seqovl=681
---dpi-desync-split-pos=1
---dpi-desync-fooling=badseq
---dpi-desync-badseq-increment=10000000
---dpi-desync-repeats=2
---dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=fonts.google.com
-```
-```
-#Yv14
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=fake,multidisorder
---dpi-desync-split-pos=10,midsld
---dpi-desync-fake-tls=0x00000000
---dpi-desync-fake-tls=0x0F0F0F0F
---dpi-desync-fake-tls=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=fonts.google.com
---dpi-desync-split-seqovl=336
---dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fooling=badseq
-```
-```
-#Yv15
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=fake,multisplit
---dpi-desync-split-pos=2,sld
---dpi-desync-fake-tls=0x0F0F0F0F
---dpi-desync-fake-tls=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=ggpht.com
---dpi-desync-split-seqovl=2108
---dpi-desync-split-seqovl-pattern=/opt/zapret/files/fake/tls_clienthello_www_google_com.bin
---dpi-desync-fooling=badsum,badseq
-```
-```
-#Yv16
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=multisplit
---dpi-desync-split-pos=1,sniext+1
---dpi-desync-split-seqovl=1
---dpi-desync-fooling=badsum,badseq
---dpi-desync-badseq-increment=0
-```
-```
-#Yv17
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=fakeddisorder
---dpi-desync-fooling=md5sig
---dup=1
---dup-cutoff=n2
---dup-fooling=md5sig
---dpi-desync-split-pos=method+2
-```
-```
-#Yv18
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---ip-id=zero
---dpi-desync=fake,hostfakesplit
---dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com
---dpi-desync-hostfakesplit-mod=host=www.google.com,altorder=1
---dpi-desync-fooling=ts
-```
-```
-#Yv19
---filter-tcp=443
---hostlist=/opt/zapret/ipset/zapret-hosts-google.txt
---dpi-desync=hostfakesplit
---dpi-desync-hostfakesplit-mod=host=google.com
---dpi-desync-fooling=ts
+
+（以下各组 `#Yv02` ~ `#Yv19` 为不同的 YouTube 绕过策略，保持原样逐一粘贴使用，每次只启用一组）
+
+含义说明简要翻译：
+
+* `Yv01` ~ `Yv19`：不同的 DPI 绕过组合策略
+* 每次只测试**一条**
+* 如果当前策略无效：
+
+  1. 完全删除旧策略
+  2. 粘贴新的策略
+  3. 重启 Zapret
+  4. 重启浏览器
+  5. 电视端需彻底关机再开机
+  6. 测试播放 YouTube
+
+这些策略通过不同方式组合：
+
+* `multisplit / multidisorder / fake / hostfakesplit` 等 DPI 反检测手段
+* 伪造 TLS ClientHello
+* 伪造 SNI
+* QUIC 干扰
+* 分包、乱序、错误校验和、错误序列号等方式绕过运营商 DPI
+
+用途：
+👉 在不同国家 / 不同运营商 / 不同设备下，总会有至少一条策略可以让 YouTube 正常访问。
