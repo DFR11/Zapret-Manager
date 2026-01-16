@@ -2,7 +2,7 @@
 
 > [!IMPORTANT]
 > This method doesn't guarantee 100% performance , as each region and provider has its own DPI!
-> Что работает у других, не обязательно будет работать у Вас и на оборот.
+> What works for others won't necessarily work for you, and vice versa.
 
 
 # Table of contents
