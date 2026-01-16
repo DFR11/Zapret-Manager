@@ -165,7 +165,7 @@
 --dpi-desync-fake-tls=/opt/zapret/files/fake/max.bin
 ```
 ---
-# Стратегия для игр
+# Strategy for games
 
 - в **NFQWS_PORTS_UDP** добавить `1024-65535`
 ```
@@ -177,7 +177,7 @@
 --dpi-desync-fake-unknown-udp=/opt/zapret/files/fake/quic_initial_www_google_com.bin
 ```
 ---
-# Стратегия для Discord
+# Strategy for Discord
 - в **NFQWS_PORTS_UDP** добавить `2053,2083,2087,2096,8443,19294-19344,50000-50100`
 ```
 --new

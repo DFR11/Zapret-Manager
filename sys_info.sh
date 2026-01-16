@@ -1,12 +1,12 @@
 #!/bin/sh
 GREEN="\033[1;32m"; RED="\033[1;31m"
 NC="\033[0m"; CONF="/etc/config/zapret"
-if ! command -v curl >/dev/null 2>&1; then echo -e "\n${GREEN}Устанавливаем ${NC}curl\n"
+if ! command -v curl >/dev/null 2>&1; then echo -e "\n${GREEN}Install ${NC}curl\n"
 opkg update >/dev/null 2>&1 && opkg install curl >/dev/null 2>&1; fi
-clear; echo -e "${GREEN}===== Информация о системе =====${NC}"
+clear; echo -e "${GREEN}===== System Information =====${NC}"
 MODEL=$(cat /tmp/sysinfo/model); ARCH=$(sed -n "s/.*ARCH='\(.*\)'/\1/p" /etc/openwrt_release)
 OWRT=$(grep '^DISTRIB_RELEASE=' /etc/openwrt_release | cut -d"'" -f2); echo -e "$MODEL\n$ARCH\n$OWRT"
-echo -e "\n${GREEN}===== Пользовательские пакеты =====${NC}"
+echo -e "\n${GREEN}===== Custom packages =====${NC}"
 awk '/^Package:/{p=$2}/^Status: install user/{k=p;sub(/^(luci-(app|mod|proto|theme)-|kmod-|lib|ucode-mod-)/,"",k);grp[k]=grp[k]?grp[k]"\n"p:p}
 END{for(k in grp){n=split(grp[k],a,"\n");if(n<2)continue;for(i=1;i<=n;i++)for(j=i+1;j<=n;j++)if(a[i]>a[j]){t=a[i];a[i]=a[j];a[j]=t}
 for(i=1;i<=n;i+=2)if(i+1<=n){L=a[i];R=a[i+1];if(L~/^luci-/&&R!~/^luci-/){t=L;L=R;R=t}print L" | "R}else print a[i]}
@@ -20,25 +20,25 @@ dpi="${RED}yes${NC}"; else dpi="${GREEN}no${NC}"; fi
 if [ "$hw" = "1" ]; then out="HW: ${RED}on${NC}"; elif [ "$sw" = "1" ]; then out="SW: ${RED}on${NC}"
 else out="SW: ${GREEN}off${NC} | HW: ${GREEN}off${NC}"; fi
 out="$out | FIX: ${dpi}"; echo -e "$out"; if /etc/init.d/https-dns-proxy status >/dev/null 2>&1; then
-echo -e "\n${GREEN}===== Настройки DNS over HTTPS =====${NC}"
+echo -e "\n${GREEN}===== DNS over HTTPS settings =====${NC}"
 [ -f /etc/config/https-dns-proxy ] && sed -n "s/^[[:space:]]*option resolver_url '\([^']*\)'.*/\1/p" /etc/config/https-dns-proxy; else
-echo -e "\n${GREEN}===== Проверка GitHub =====${NC}"
+echo -e "\n${GREEN}===== Checkout GitHub =====${NC}"
 RATE=$(curl -s https://api.github.com/rate_limit | grep '"remaining"' | head -1 | awk '{print $2}' | tr -d ,)
 [ -z "$RATE" ] && RATE_OUT="${RED}N/A${NC}" || RATE_OUT=$([ "$RATE" -eq 0 ] && echo -e "${RED}0${NC}" || echo -e "${GREEN}$RATE${NC}")
 echo -n "API: "; curl -Is --connect-timeout 3 https://api.github.com >/dev/null 2>&1 && echo -e "${GREEN}ok${NC} | Limit: $RATE_OUT" || echo -e "${RED}fail${NC} | Limit: $RATE_OUT"; fi
-echo -e "\n${GREEN}===== Проверка IPv4 / IPv6 =====${NC}"
+echo -e "\n${GREEN}===== IPv4 / IPv6 check =====${NC}"
 wget -qO- "http://ip-api.com/line/?fields=as,country,city" | tr '\n' ',' | sed -E 's/AS[0-9]+ ?//g; s/,$//; s/,/, /g; s/(.*), (O.*)/\1\n\2/; s/\b(OJSC|PJSC|IROKO) //g'
 echo
 echo -n "Google IPv4: "; time=$(ping -4 -c 1 -W 2 google.com 2>/dev/null | grep 'time=' | awk -F'time=' '{print $2}' | awk '{print $1}')
 if [ -n "$time" ]; then echo -e "${GREEN}ok ($time ms)${NC}"; else echo -e "${RED}fail${NC}"; fi
 echo -n "Google IPv6: "; time=$(ping -6 -c 1 -W 2 google.com 2>/dev/null | grep 'time=' | awk -F'time=' '{print $2}' | awk '{print $1}')
 if [ -n "$time" ]; then echo -e "${GREEN}ok ($time ms)${NC}"; else echo -e "${RED}fail${NC}"; fi
-echo -e "\n${GREEN}===== Настройки Zapret =====${NC}"
+echo -e "\n${GREEN}===== Zapret settings =====${NC}"
 zpr_info() { INSTALLED_VER=$(opkg list-installed | grep '^zapret ' | awk '{print $3}')
 NFQ_RUN=$(pgrep -f nfqws | wc -l); NFQ_ALL=$(/etc/init.d/zapret info 2>/dev/null | grep -o 'instance[0-9]\+' | wc -l); NFQ_STAT=""
 [ "$NFQ_RUN" -ne 0 ] || [ "$NFQ_ALL" -ne 0 ] && { [ "$NFQ_RUN" -eq "$NFQ_ALL" ] && NFQ_CLR="$GREEN" || NFQ_CLR="$RED"; NFQ_STAT="${NFQ_CLR}[${NFQ_RUN}/${NFQ_ALL}]${NC}"; }
-if /etc/init.d/zapret status 2>/dev/null | grep -qi "running"; then ZAPRET_STATUS="${GREEN}запущен${NC} $NFQ_STAT"
-else ZAPRET_STATUS="${RED}остановлен${NC}"; fi; SCRIPT_FILE="/opt/zapret/init.d/openwrt/custom.d/50-script.sh"
+if /etc/init.d/zapret status 2>/dev/null | grep -qi "running"; then ZAPRET_STATUS="${GREEN}started${NC} $NFQ_STAT"
+else ZAPRET_STATUS="${RED}stopped${NC}"; fi; SCRIPT_FILE="/opt/zapret/init.d/openwrt/custom.d/50-script.sh"
 if [ -f "$SCRIPT_FILE" ]; then line=$(head -n1 "$SCRIPT_FILE"); case "$line" in *QUIC*) name="50-quic4all" ;;
 *stun*) name="50-stun4all" ;; *"discord media"*) name="50-discord-media" ;;
 *"discord subnets"*) name="50-discord" ;; *) name="" ;; esac; fi
@@ -46,11 +46,11 @@ TCP_VAL=$(grep -E "^[[:space:]]*option NFQWS_PORTS_TCP[[:space:]]+'" "$CONF" | s
 UDP_VAL=$(grep -E "^[[:space:]]*option NFQWS_PORTS_UDP[[:space:]]+'" "$CONF" | sed "s/.*'\(.*\)'.*/\1/")
 echo -e "${GREEN}$INSTALLED_VER${NC} | $ZAPRET_STATUS"; [ -n "$name" ] && echo -e "${GREEN}$name${NC}"
 echo -e "TCP: ${GREEN}$TCP_VAL${NC}\nUDP: ${GREEN}$UDP_VAL${NC}"
-echo -e "\n${GREEN}===== Стратегия =====${NC}"
+echo -e "\n${GREEN}===== Strategy =====${NC}"
 awk '/^[[:space:]]*option[[:space:]]+NFQWS_OPT[[:space:]]*'\''/ {flag=1; sub(/^[[:space:]]*option[[:space:]]+NFQWS_OPT[[:space:]]*'\''/, ""); next}  
 flag {if(/'\''/) {sub(/'\''$/, ""); print; exit} print}' "$CONF"; }
-if [ -f /etc/init.d/zapret ]; then zpr_info; else echo -e "${RED}Zapret не установлен!${NC}\n"; fi
-echo -e "${GREEN}===== Доступность сайтов =====${NC}"
+if [ -f /etc/init.d/zapret ]; then zpr_info; else echo -e "${RED}Zapret not installed!${NC}\n"; fi
+echo -e "${GREEN}===== Website availability =====${NC}"
 SITES=$(cat <<'EOF'
 gosuslugi.ru
 esia.gosuslugi.ru
