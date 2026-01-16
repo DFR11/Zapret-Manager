@@ -1,7 +1,7 @@
 <h1 align="center">Instructions for setting up Zapret from remittor using Zapret Manager</h1>
 
 > [!IMPORTANT]
-> Данный способ **не гарантирует 100% работу**, поскольку каждый регион и провайдер имеет свой DPI !!!
+> This method doesn't guarantee 100% performance , as each region and provider has its own DPI!
 > Что работает у других, не обязательно будет работать у Вас и на оборот.
 
 
