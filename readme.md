@@ -13,7 +13,7 @@
 - [Cтратегии для Youtube](#-стратегии-для-youtube)
 - [Cтратегии используемые в скрипте](#-стратегии-используемые-в-скрипте)
 - [Благодарности](#благодарности)
-- [Поддержать проект](https://github.com/StressOzz)
+- [Поддержать проект](https://github.com/DFR11)
 
 ---
 
@@ -44,11 +44,11 @@
 Подключитесь по **SSH** к роутеру и выполните команду:
 
 ```
-sh <(wget -O - https://raw.githubusercontent.com/StressOzz/Zapret-Manager/main/Zapret-Manager.sh)
+sh <(wget -O - https://raw.githubusercontent.com/DFR11/Zapret-Manager/main/Zapret-Manager.sh)
 ```
 или
 ```
-wget -O /tmp/Zapret-Manager.sh https://raw.githubusercontent.com/StressOzz/Zapret-Manager/main/Zapret-Manager.sh && sh /tmp/Zapret-Manager.sh
+wget -O /tmp/Zapret-Manager.sh https://raw.githubusercontent.com/DFR11/Zapret-Manager/main/Zapret-Manager.sh && sh /tmp/Zapret-Manager.sh
 ```
 >Если скрипт не запускается, остановите Zapret:
 >```
@@ -92,19 +92,19 @@ wget -O /tmp/Zapret-Manager.sh https://raw.githubusercontent.com/StressOzz/Zapre
 
 ## In the script, in the second paragraph there is Selection of strategies for YouTube
 
-[Cтратегии для Youtube](https://github.com/StressOzz/Zapret-Manager/blob/main/Strategies_For_Youtube.md)
+[Cтратегии для Youtube](https://github.com/DFR11/Zapret-Manager/blob/main/Strategies_For_Youtube.md)
 
 ## 🔹 Strategies used in the script
 
-[Cтратегии используемые в скрипте](https://github.com/StressOzz/Zapret-Manager/blob/main/Strategies.md)
+[Cтратегии используемые в скрипте](https://github.com/DFR11/Zapret-Manager/blob/main/Strategies.md)
 
 ---
 
-[<img width="190" height="175" alt="donate-button-click-donation-charity-600nw-2339825981" src="https://github.com/user-attachments/assets/2999757b-fbf3-4149-bf6c-48bf3e241529" />](https://github.com/StressOzz#-поддержать-проект)
+[<img width="190" height="175" alt="donate-button-click-donation-charity-600nw-2339825981" src="https://github.com/user-attachments/assets/2999757b-fbf3-4149-bf6c-48bf3e241529" />](https://github.com/DFR11#-поддержать-проект)
 
 ---
 
-[![Star History Chart](https://api.star-history.com/svg?repos=StressOzz/Zapret-Manager&type=date&legend=top-left)](https://www.star-history.com/#StressOzz/Zapret-Manager&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=DFR11/Zapret-Manager&type=date&legend=top-left)](https://www.star-history.com/#DFR11/Zapret-Manager&type=date&legend=top-left)
 
 ---
 
