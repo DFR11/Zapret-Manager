@@ -1,4 +1,4 @@
-<h1 align="center"> Инструкция по настройке Zapret от remittor при помощи Zapret Manager</h1>
+<h1 align="center">Instructions for setting up Zapret from remittor using Zapret Manager</h1>
 
 > [!IMPORTANT]
 > Данный способ **не гарантирует 100% работу**, поскольку каждый регион и провайдер имеет свой DPI !!!
