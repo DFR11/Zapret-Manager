@@ -1,118 +1,127 @@
-<h1 align="center">Instructions for setting up Zapret from remittor using Zapret Manager</h1>
+以下为全文俄文内容的中文翻译（保留原有 Markdown 结构）：
+
+---
+
+<h1 align="center">使用 Zapret Manager 配置 remittor 版 Zapret 的说明</h1>
 
 > [!IMPORTANT]
-> This method doesn't guarantee 100% performance , as each region and provider has its own DPI!
-> What works for others won't necessarily work for you, and vice versa.
+> 本方法不能保证 100% 成功率，因为每个地区和运营商的 DPI 都不同！
+> 别人能用的不一定适合你，反之亦然。
 
+# 目录
 
-# Table of contents
-- [Возможности](#-возможности)
-- [Подготовка системы](#-подготовка-системы)
-- [Запуск менеджера](#-запуск-менеджера)
-- [Быстрый старт и пункты меню](#-быстрый-старт)
-- [Cтратегии для Youtube](#-стратегии-для-youtube)
-- [Cтратегии используемые в скрипте](#-стратегии-используемые-в-скрипте)
-- [Благодарности](#благодарности)
-- [Поддержать проект](https://github.com/DFR11)
-
----
-
-## 🔹 Opportunities
-
-- Установить **Zapret** последней версии
-- Установить работачую стратегию
-- Выбрать стратегию для уставноки **v1-v7**
-- Подобрать стартегию для **YouTube**
-- Включить стратегию для игр
-- Уставновить скрипт для **Discord**
-- Включить обход Финских **IP** для **Discord**
-- Уставновить **DoH** (**DNS over HTTPS**) и выбрать **DNS**-сервер
-- Получить доступ к **Zapret Manager** из браузера
-- Включить блокировку **QUIC** (порты 80,443)
+* [功能](#-功能)
+* [系统准备](#-系统准备)
+* [启动管理器](#-启动管理器)
+* [快速开始与菜单项](#-快速开始)
+* [YouTube 策略](#-youtube-策略)
+* [脚本中使用的策略](#-脚本中使用的策略)
+* [致谢](#致谢)
+* [支持项目](https://github.com/DFR11)
 
 ---
 
-## 🔹 Preparing the system
+## 🔹 功能
 
-- Если у Вас установлен **ByeDPI** или **youtubeUnblock** скрипт выдаст сообщение
-- Если у Вас включён **Flow offloading** скрипт выдаст сообщение и в `Системном меню`, появится пункт **0** - **Применить FIX**
+* 安装最新版 **Zapret**
+* 安装可用的绕过策略
+* 选择 **v1–v7** 版本策略
+* 为 **YouTube** 选择专用策略
+* 启用游戏专用策略
+* 安装 **Discord** 专用脚本
+* 启用绕过芬兰 **IP** 的 **Discord** 规则
+* 安装 **DoH**（**DNS over HTTPS**）并选择 **DNS** 服务器
+* 通过浏览器访问 **Zapret Manager**
+* 启用 **QUIC** 协议封锁（端口 80、443）
 
 ---
 
-## 🔹 Starting the manager
+## 🔹 系统准备
 
-Подключитесь по **SSH** к роутеру и выполните команду:
+* 如果系统中已安装 **ByeDPI** 或 **youtubeUnblock**，脚本会提示
+* 如果启用了 **Flow offloading**，脚本会提示，并在“系统菜单”中出现 **0** 号选项 —— **应用修复（FIX）**
 
-```
+---
+
+## 🔹 启动管理器
+
+通过 **SSH** 连接路由器并执行：
+
+```bash
 sh <(wget -O - https://raw.githubusercontent.com/DFR11/Zapret-Manager/main/Zapret-Manager.sh)
 ```
-или
-```
+
+或：
+
+```bash
 wget -O /tmp/Zapret-Manager.sh https://raw.githubusercontent.com/DFR11/Zapret-Manager/main/Zapret-Manager.sh && sh /tmp/Zapret-Manager.sh
 ```
->Если скрипт не запускается, остановите Zapret:
->```
->/etc/init.d/zapret stop
->```
 
-Для запуска скрипта в браузере или в LuСI
-- запустите скрипт → Системное меню → Активировать доступ к скрипту из браузера
+> 如果脚本无法启动，请先停止 Zapret：
+>
+> ```bash
+> /etc/init.d/zapret stop
+> ```
 
-После уставноки, скрипт будет доступен:
-- в браузере по адрессу **http://192.168.1.1:7681**
-- в LuCI вкладка **Services** → **Terminal**
+在浏览器或 LuCI 中启动脚本：
 
----
+* 运行脚本 → 系统菜单 → 启用从浏览器访问脚本
 
-## 🔹 Quick start
+安装完成后，脚本可通过以下方式访问：
 
-**Пункт 8** — **Удалить → установить → настроить Zapret**
-
-Установка **Zapret** под ключ
-
-Автоматически и без пауз выполняются пункты меню - **5** → **1** → **2** → **7** → **6** 
-- Удаляет Zapret
-- Устанавливает последнею версию Zapret
-- Устанавливает стратегию **v6**
-- Устанавливает скрипт **50-stun4all**
-- Добавляет в стратегию настройки для игр
-
->⚠️ Использовать только для полной переустановки и настройки Zapret.
-
-
-- Откроются заблокированные сайты: **rutor.info**, **ntc.party**, **rutracker.org**, **lib.rus.ec**, **Instagram*** (на ПК и в приложении) и другие...
-- Заработает **Discord** (возможно придётся настроить через **пункт 7**)
-- Заработают сетевые режимы в играх: **Battlefield 6**, **Apex Legend**, **Roblox** и в других...
+* 浏览器地址：**[http://192.168.1.1:7681](http://192.168.1.1:7681)**
+* LuCI 中：**Services** → **Terminal**
 
 ---
 
-## 🔹 Strategies for Youtube
+## 🔹 快速开始
 
-Если у Вас не запускается **Youtube** на каком-нибудь устройстве, то попробуйте подобрать стратегию только для **YouTube**.
+**第 8 项** —— **删除 → 安装 → 配置 Zapret**
 
-## In the script, in the second paragraph there is Selection of strategies for YouTube
+一键全自动安装 Zapret
 
-[Cтратегии для Youtube](https://github.com/DFR11/Zapret-Manager/blob/main/Strategies_For_Youtube.md)
+将依次自动执行菜单项：**5** → **1** → **2** → **7** → **6**
 
-## 🔹 Strategies used in the script
+其作用：
 
-[Cтратегии используемые в скрипте](https://github.com/DFR11/Zapret-Manager/blob/main/Strategies.md)
+* 删除现有 Zapret
+* 安装最新版 Zapret
+* 安装 **v6** 策略
+* 安装 **50-stun4all** 脚本
+* 为游戏添加专用参数
 
----
+> ⚠️ 仅用于完全重装并重新配置 Zapret。
 
-[<img width="190" height="175" alt="donate-button-click-donation-charity-600nw-2339825981" src="https://github.com/user-attachments/assets/2999757b-fbf3-4149-bf6c-48bf3e241529" />](https://github.com/DFR11#-поддержать-проект)
+效果：
 
----
-
-[![Star History Chart](https://api.star-history.com/svg?repos=DFR11/Zapret-Manager&type=date&legend=top-left)](https://www.star-history.com/#DFR11/Zapret-Manager&type=date&legend=top-left)
-
----
-
-# Thanks:
-
-- **Zapret** by *bol-van* (https://github.com/bol-van)
-- **Zapret-OpenWrt** by *remittor* (https://github.com/remittor)
+* 可访问被封锁的网站：**rutor.info**, **ntc.party**, **rutracker.org**, **lib.rus.ec**, **Instagram***（PC 与 App）等
+* **Discord** 可用（可能需要在 **第 7 项** 中单独配置）
+* 游戏联机恢复：**Battlefield 6**, **Apex Legends**, **Roblox** 等
 
 ---
 
-*принадлежит компании Meta, признанной экстремистской и запрещённой на территории РФ
+## 🔹 YouTube 策略
+
+如果某些设备上 **YouTube** 无法播放，请尝试仅为 **YouTube** 单独选择策略。
+
+在脚本第二项中可以选择 YouTube 专用策略：
+
+[YouTube 策略列表](https://github.com/DFR11/Zapret-Manager/blob/main/Strategies_For_Youtube.md)
+
+---
+
+## 🔹 脚本中使用的策略
+
+[脚本内置策略说明](https://github.com/DFR11/Zapret-Manager/blob/main/Strategies.md)
+
+---
+
+[支持项目按钮](https://github.com/StressOzz#-поддержать-проект)
+
+---
+
+# 致谢
+
+* **Zapret** 作者：*bol-van* ([https://github.com/bol-van](https://github.com/bol-van))
+* **Zapret-OpenWrt** 作者：*remittor* ([https://github.com/remittor](https://github.com/remittor))
+
